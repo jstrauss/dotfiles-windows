@@ -1,4 +1,4 @@
-﻿# Jeff Strauss's dotfiles for Windows
+# Jeff Strauss's dotfiles for Windows
 
 A collection of PowerShell files for Windows, including common application installation through `chocolatey` and `npm`, and developer-minded Windows configuration defaults.
 
@@ -73,9 +73,9 @@ If you are not going to tie your Windows installation to a Microsoft
 Live Account, then be sure to uncomment the lines 19 to 24 in this file
 and set the appropriate `$userFullName` variable before running.
 
-### Install Dependencies and Packages
+### Install dependencies and packages
 
-When setting up a new Windows box, you may want to install some common packages, utilities, and dependencies. These could include Node.js packages via [NPM](https://www.npmjs.org), [Chocolatey](http://chocolatey.org/) packages, and Visual Studio Extensions from the [Gallery](http://visualstudiogallery.msdn.microsoft.com/). The scripts will install Chocolatey, if it not already installed. Node is required, and can be installed via Chocalatey.
+When setting up a new Windows box, you may want to install some common packages, utilities, and dependencies. These could include Node.js packages via [NPM](https://www.npmjs.org), [Chocolatey](http://chocolatey.org/) packages, Windows Features and Tools via [Web Platform Installer](https://www.microsoft.com/web/downloads/platform.aspx), and Visual Studio Extensions from the [Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/).
 
 All of these dependencies can be found near the beginning of this file:
 
@@ -83,18 +83,17 @@ All of these dependencies can be found near the beginning of this file:
 .\deps.ps1
 ```
 
-Or, to install Visual Studio plugins at any time:
+> The scripts will install Chocolatey, node.js, and WebPI if necessary.
 
-```posh
-Install-VSExtension $url
-```
-
-The Url can be found on the gallery. It's the extensions `Download` link url.
-
+> **Visual Studio Extensions**  
+> Extensions will be installed into your most current version of Visual
+> Studio. You can also install additional plugins at any time via
+> `Install-VSExtension $url`. The URL can be found on the Gallery; it is
+> the extension's `Download` link URL.
 
 ## Forking your own version
 
-This repository is built around how I use Windows, which is predominantly in a VM hosted on OSX. As such, things like VNC or Ruby or FileZilla or Skype are not installed, as they are available to me on the OSX side, installed by my [OSX dotfiles](https://github.com/jstrauss/dotfiles). If you are using Windows as your primary OS, you may want a different configuration that reflects that, and I recommend you [fork this repository](https://github.com/jayharris/dotfiles-windows/fork) from Jay Harris.
+This repository is built around how I use Windows, which is predominantly in a VM hosted on OSX. As such, things like VNC, FileZilla, or Skype are not installed, as they are available to me on the OS X side, installed by my [OSX dotfiles](https://github.com/jstrauss/dotfiles). If you are using Windows as your primary OS, you may want a different configuration that reflects that, and I recommend you [fork this repository](https://github.com/jayharris/dotfiles-windows/fork) from Jay Harris.
 
 If you do fork for your own custom configuration, you will need to touch a few files to reference your own repository, instead of mine.
 
@@ -105,7 +104,13 @@ $repo    = "dotfiles-windows"
 $branch  = "master"
 ```
 
-Also, be sure to reference your own repository in the git-free installation command.
+Within the Windows Defaults file, `/windows.ps1`, modify the Machine
+name on the first line.
+```posh
+$machineName    = "MyMachineName"
+```
+
+Finally, be sure to reference your own repository in the git-free installation command.
 ```bash
 iex ((new-object net.webclient).DownloadString('https://raw.github.com/$account/$repo/$branch/setup/install.ps1'))
 ```
@@ -123,4 +128,4 @@ Suggestions/improvements are
 
 ## Thanks to…
 
-* @[Mathias Bynens](http://mathiasbynens.be/) for his [OSX dotfiles](http://mths.be/dotfiles), and @[Jay Harris](http://github.com/jayharris) from whose this repo is forked.
+* @[Mathias Bynens](http://mathiasbynens.be/) for his [OSX dotfiles](http://mths.be/dotfiles), and @[Jay Harris](http://github.com/jayharris) from whose repository this repo is forked.
