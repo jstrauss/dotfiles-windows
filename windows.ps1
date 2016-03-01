@@ -92,8 +92,87 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explo
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" "HideSCAVolume" 1  # Volume
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" "HideSCAPower" 1  # Power
 
+# Taskbar: Show colors on Taskbar, Start, and SysTray (0: Disabled, 1: Taskbar, Start, & SysTray, 2: Taskbar Only)
+Set-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" "ColorPrevalence" 1
+
+# Titlebar: Show colors on titlebar (0: Disabled, 1: Enabled)
+Set-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows\DWM" "ColorPrevalence" 0
+
 # Recycle Bin: Disable Delete Confirmation Dialog
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" "ConfirmFileDelete" 0
+
+
+### Remove default Windows Apps
+### --------------------------
+
+# 3D Builder
+Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
+
+# Alarms and Clock
+Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage
+
+# Bing Finance
+Get-AppxPackage "Microsoft.BingFinance" | Remove-AppxPackage
+
+# Bing News
+Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage
+
+# Bing Sports
+Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage
+
+# Bing Weather
+Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage
+
+# Calendar and Mail
+Get-AppxPackage "Microsoft.WindowsCommunicationsApps" | Remove-AppxPackage
+
+# Candy Crush Soda Saga
+Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage
+
+# Get Office, and it's "Get Office365" notifications
+Get-AppxPackage "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage
+
+# Get Started
+Get-AppxPackage "Microsoft.GetStarted" | Remove-AppxPackage
+
+# Maps
+Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
+
+# Messaging
+Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage
+
+# OneNote
+Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
+
+# People
+Get-AppxPackage "Microsoft.People" | Remove-AppxPackage
+
+# Photos
+Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage
+
+# Skype
+Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage
+
+# Solitaire
+Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage
+
+# Sway
+Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage
+
+# Twitter
+Get-AppxPackage "*.Twitter" | Remove-AppxPackage
+
+# Voice Recorder
+Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage
+
+# Windows Phone Companion
+Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage
+
+# Zune Music (Groove)
+Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
+
+# Zune Video
+Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
 
 
 ### Lock Screen
@@ -150,90 +229,44 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Internet Explorer\Main" "Start Page" 
 $diskCleanupRegPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\"
 
 # Cleanup Files by Group. 0=Disabled, 2=Enabled
-Set-ItemProperty Join-Path($diskCleanupRegPath "Active Setup Temp Folders"                    ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "BranchCache"                                  ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Downloaded Program Files"                     ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Internet Cache Files"                         ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Offline Pages Files"                          ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Old ChkDsk Files"                             ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Previous Installations"                       ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Recycle Bin"                                  ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "RetailDemo Offline Content"                   ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Service Pack Cleanup"                         ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Setup Log Files"                              ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "System error memory dump files"               ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "System error minidump files"                  ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Temporary Files"                              ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Temporary Setup Files"                        ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Thumbnail Cache"                              ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Update Cleanup"                               ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Upgrade Discarded Files"                      ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "User file versions"                           ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Windows Defender"                             ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Windows Error Reporting Archive Files"        ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Windows Error Reporting Queue Files"          ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Windows Error Reporting System Archive Files" ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Windows Error Reporting System Queue Files"   ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Windows Error Reporting Temp Files"           ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Windows ESD installation files"               ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
-Set-ItemProperty Join-Path($diskCleanupRegPath "Windows Upgrade Log Files"                    ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "BranchCache"                                  ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Downloaded Program Files"                     ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Internet Cache Files"                         ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Offline Pages Files"                          ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Old ChkDsk Files"                             ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Previous Installations"                       ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Recycle Bin"                                  ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "RetailDemo Offline Content"                   ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Service Pack Cleanup"                         ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Setup Log Files"                              ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "System error memory dump files"               ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "System error minidump files"                  ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Temporary Files"                              ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Temporary Setup Files"                        ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Thumbnail Cache"                              ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Update Cleanup"                               ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Upgrade Discarded Files"                      ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "User file versions"                           ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Windows Defender"                             ) "StateFlags6174" 2   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Windows Error Reporting Archive Files"        ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Windows Error Reporting Queue Files"          ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Windows Error Reporting System Archive Files" ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Windows Error Reporting System Queue Files"   ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Windows Error Reporting Temp Files"           ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Windows ESD installation files"               ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
+Set-ItemProperty $(Join-Path $diskCleanupRegPath "Windows Upgrade Log Files"                    ) "StateFlags6174" 0   -ErrorAction SilentlyContinue
 
-Remove-Variable $diskCleanupRegPath
+Remove-Variable diskCleanupRegPath
 
 
 ### PowerShell Console
 ### --------------------------
 
+# PowerShell: Make 'Source Code Pro' an available Console font
+Set-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Console\TrueTypeFont' 000 'Source Code Pro'
+
 # Custom Path for PSReadLine Settings
 if (!(Test-Path "HKCU:\Console\PSReadLine")) {New-Item -Path "HKCU:\Console\PSReadLine" -Type Folder | Out-Null}
-
-$settings = @{
-# Console: Dimensions of window, in characters. (8-byte; 4b height, 4b width. Max: 0x7FFF7FFF (32767h x 32767w))
-"WindowSize"           = 0x00320078; # 50h x 120w
-# Console: Dimensions of screen buffer in memory, in characters. (8-byte; 4b height, 4b width. Max: 0x7FFF7FFF (32767h x 32767w))
-"ScreenBufferSize"     = 0x0BB80078; # 3000h x 120w
-# Console: Percentage of Character Space for Cursor (25: Small, 50: Medium, 100: Large)
-"CursorSize"           = 100; # 100
-# Console: Name of display font (TrueType)
-"FaceName"             = "Lucida Console";
-# Console: Font Family. (0: Raster, 54: TrueType)
-"FontFamily"           = 54;
-# Console: Dimensions of font character in pixels. (8-byte; 4b height, 4b width. 0: Auto)
-"FontSize"             = 0x000F0000; # 15px height x auto width
-# Console: Boldness of font. Raster=(0: Normal, 1: Bold). TrueType=(100-900, 400: Normal)
-"FontWeight"           = 400;
-# Console: Number of commands in history buffer. (50: Default)
-"HistoryBufferSize"    = 50;
-# Console: Discard duplicate commands (0: Disabled, 1: Enabled)
-"HistoryNoDup"         = 1;
-# Console: Typing Mode. (0: Overtype, 1: Insert)
-"InsertMode"           = 1;
-# Console: Allow Copy/Paste using Mouse (0: Disabled, 1:Enabled)
-"QuickEdit"            = 1;
-# Console: Colors for Window. (8-byte; 4b background, 4b foreground. 0-15: Color, 0x07: Default)
-"ScreenColors"         = 0x0F;
-# Console: Colors for Popup Windows. (8-byte; 4b background, 4b foreground. 0-15: Color, 0xF7: Default)
-"PopupColors"          = 0xF0;
-
-# Console: The 16 colors in the Console color well (BGR).
-# Jellybeans
-"ColorTable00"         = Convert-ConsoleColor "#151515"; # Black (0)
-"ColorTable01"         = Convert-ConsoleColor "#8197bf"; # DarkBlue (1)
-"ColorTable02"         = Convert-ConsoleColor "#437019"; # DarkGreen (2)
-"ColorTable03"         = Convert-ConsoleColor "#556779"; # DarkCyan (3)
-"ColorTable04"         = Convert-ConsoleColor "#902020"; # DarkRed (4)
-"ColorTable05"         = Convert-ConsoleColor "#540063"; # DarkMagenta (5)
-"ColorTable06"         = Convert-ConsoleColor "#dad085"; # DarkYellow (6)
-"ColorTable07"         = Convert-ConsoleColor "#888888"; # Gray (7)
-"ColorTable08"         = Convert-ConsoleColor "#606060"; # DarkGray (8)
-"ColorTable09"         = Convert-ConsoleColor "#7697d6"; # Blue (9)
-"ColorTable10"         = Convert-ConsoleColor "#99ad6a"; # Green (A)
-"ColorTable11"         = Convert-ConsoleColor "#c6b6ee"; # Cyan (B)
-"ColorTable12"         = Convert-ConsoleColor "#cf6a4c"; # Red (C)
-"ColorTable13"         = Convert-ConsoleColor "#f0a0c0"; # Magenta (D)
-"ColorTable14"         = Convert-ConsoleColor "#fad07a"; # Yellow (E)
-"ColorTable15"         = Convert-ConsoleColor "#e8e8d3"; # White (F)
-}
 
 # PSReadLine: Normal syntax color. vim Normal group. (Default: Foreground)
 Set-ItemProperty "HKCU:\Console\PSReadLine" "NormalForeground" 0xF
@@ -272,12 +305,54 @@ Set-ItemProperty "HKCU:\Console\PSReadLine" "ErrorForeground" 0x4
         New-Item -path $_ -ItemType Folder | Out-Null
     }
 
-    ForEach ($setting in $settings.GetEnumerator()) {
-        Set-ItemProperty -Path $_ -Name $($setting.Name) -Value $($setting.Value)
-    }
-    Remove-Variable setting
+# Console: Dimensions of window, in characters. (8-byte; 4b height, 4b width. Max: 0x7FFF7FFF (32767h x 32767w))
+Set-ItemProperty $_ "WindowSize"           0x002D0078; # 45h x 120w
+# Console: Dimensions of screen buffer in memory, in characters. (8-byte; 4b height, 4b width. Max: 0x7FFF7FFF (32767h x 32767w))
+Set-ItemProperty $_ "ScreenBufferSize"     0x0BB80078; # 3000h x 120w
+# Console: Percentage of Character Space for Cursor (25: Small, 50: Medium, 100: Large)
+Set-ItemProperty $_ "CursorSize"           100; # 100
+# Console: Name of display font (TrueType)
+Set-ItemProperty $_ "FaceName"             "Source Code Pro";
+# Console: Font Family. (0: Raster, 54: TrueType)
+Set-ItemProperty $_ "FontFamily"           54;
+# Console: Dimensions of font character in pixels (Pixels, not Points). (8-byte; 4b height, 4b width. 0: Auto)
+Set-ItemProperty $_ "FontSize"             0x00110000; # 17px height x auto width
+# Console: Boldness of font. Raster=(0: Normal, 1: Bold). TrueType=(100-900, 400: Normal)
+Set-ItemProperty $_ "FontWeight"           400;
+# Console: Number of commands in history buffer. (50: Default)
+Set-ItemProperty $_ "HistoryBufferSize"    50;
+# Console: Discard duplicate commands (0: Disabled, 1: Enabled)
+Set-ItemProperty $_ "HistoryNoDup"         1;
+# Console: Typing Mode. (0: Overtype, 1: Insert)
+Set-ItemProperty $_ "InsertMode"           1;
+# Console: Allow Copy/Paste using Mouse (0: Disabled, 1:Enabled)
+Set-ItemProperty $_ "QuickEdit"            1;
+# Console: Colors for Window. (8-byte; 4b background, 4b foreground. 0-15: Color, 0x07: Default)
+Set-ItemProperty $_ "ScreenColors"         0x0F;
+# Console: Colors for Popup Windows. (8-byte; 4b background, 4b foreground. 0-15: Color, 0xF7: Default)
+Set-ItemProperty $_ "PopupColors"          0xF0;
+# Console: Adjust opacity between 30% and 100%: 0x4C to 0xFF -or- 76 to 255.
+Set-ItemProperty $_ "WindowAlpha"          0xF2; # 95%
+
+# Console: The 16 colors in the Console color well (Persisted values are in BGR).
+# Jellybeans
+Set-ItemProperty $_ "ColorTable00"         $(Convert-ConsoleColor "#151515") # Black (0)
+Set-ItemProperty $_ "ColorTable01"         $(Convert-ConsoleColor "#8197bf") # DarkBlue (1)
+Set-ItemProperty $_ "ColorTable02"         $(Convert-ConsoleColor "#437019") # DarkGreen (2)
+Set-ItemProperty $_ "ColorTable03"         $(Convert-ConsoleColor "#556779") # DarkCyan (3)
+Set-ItemProperty $_ "ColorTable04"         $(Convert-ConsoleColor "#902020") # DarkRed (4)
+Set-ItemProperty $_ "ColorTable05"         $(Convert-ConsoleColor "#540063") # DarkMagenta (5)
+Set-ItemProperty $_ "ColorTable06"         $(Convert-ConsoleColor "#dad085") # DarkYellow (6)
+Set-ItemProperty $_ "ColorTable07"         $(Convert-ConsoleColor "#888888") # Gray (7)
+Set-ItemProperty $_ "ColorTable08"         $(Convert-ConsoleColor "#606060") # DarkGray (8)
+Set-ItemProperty $_ "ColorTable09"         $(Convert-ConsoleColor "#7697d6") # Blue (9)
+Set-ItemProperty $_ "ColorTable10"         $(Convert-ConsoleColor "#99ad6a") # Green (A)
+Set-ItemProperty $_ "ColorTable11"         $(Convert-ConsoleColor "#c6b6ee") # Cyan (B)
+Set-ItemProperty $_ "ColorTable12"         $(Convert-ConsoleColor "#cf6a4c") # Red (C)
+Set-ItemProperty $_ "ColorTable13"         $(Convert-ConsoleColor "#f0a0c0") # Magenta (D)
+Set-ItemProperty $_ "ColorTable14"         $(Convert-ConsoleColor "#fad07a") # Yellow (E)
+Set-ItemProperty $_ "ColorTable15"         $(Convert-ConsoleColor "#e8e8d3") # White (F)
 }
-Remove-Setting settings
 
 Reset-AllPowerShellShortcuts
 
